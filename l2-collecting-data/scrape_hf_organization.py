@@ -9,7 +9,7 @@ import json
 import logging
 import html
 import requests
-from typing import Optional, Dict, Any
+from typing import Dict, Any
 from bs4 import BeautifulSoup
 from hf_client import get_client
 

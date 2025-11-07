@@ -1,0 +1,75 @@
+{
+  "type": "object",
+  "properties": {
+    "is_license": {
+      "type": "boolean",
+      "description": "True if the input text is an actual software license, not commentary, metadata, list of license types, or a placeholder"
+    },
+    "licenses": {
+      "type": ["array", "null"],
+      "description": "List of licenses that are currently active and applied to the repository/code. Excludes past, future, or conditional licenses.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "license_family": {
+            "type": "string",
+            "enum": [
+              "Business Source License",
+              "Functional Source License",
+              "Server Side Public License",
+              "Elastic License",
+              "Redis Source Available License",
+              "CockroachDB Community License",
+              "Polyform License",
+              "MIT License",
+              "Apache License",
+              "GNU General Public License (GPL)",
+              "GNU Lesser General Public License (LGPL)",
+              "GNU Affero General Public License (AGPLv3)",
+              "Berkeley Software Distribution (BSD) License",
+              "Boost Software License",
+              "Mozilla Public License",
+              "German Free Software License",
+              "Reciprocal Public License",
+              "Common Public License",
+              "Eclipse Public License",
+              "Creative Commons",
+              "Custom",
+              "Other"
+            ],
+            "description": "The license family detected, e.g. Apache, GPL, or Server Side Public License. Use 'Other' when known license type not in list. Use 'Custom' for bespoke, project-specific license."
+          },
+          "license_name": {
+            "type": ["string", "null"],
+            "description": "The name of the specific license, including version number, e.g. Apache-2.0 or BSD-3-Clause"
+          },
+          "confidence": {
+            "type": "string",
+            "enum": ["high", "medium", "low"],
+            "description": "Confidence level in the license detection"
+          },
+          "commercial_use_is_restricted": {
+            "type": "boolean",
+            "description": "Whether the license explicitly restricts usage of software for commercial purposes, even conditionally."
+          },
+          "is_copyleft": {
+            "type": ["boolean", "null"],
+            "description": "Whether the license requires that its source code be made publicly available and that all provisions in the license be preserved in derivative works"
+          },
+          "explanation": {
+            "type": ["string", "null"],
+            "description": "Free text explanation required for license_family 'Custom' or 'Other'. Leave `null` otherwise"
+          }
+        },
+        "required": ["license_family", "license_name", "confidence", "commercial_use_is_restricted", "is_copyleft", "explanation"],
+        "additionalProperties": false
+      }
+    },
+    "analysis_notes": {
+      "type": ["string", "null"],
+      "description": "Additional notes about the license analysis, especially for complex or ambiguous cases, such as when code is selectively licensed"
+    }
+  },
+  "required": ["is_license", "licenses", "analysis_notes"],
+  "additionalProperties": false
+}
